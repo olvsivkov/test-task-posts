@@ -1,4 +1,4 @@
-import { BrowserRouter as Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { Provider } from 'react-redux';
 import { setupStore } from '../shared/redux-query-api';
