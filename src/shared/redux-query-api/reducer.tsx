@@ -1,7 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit"
 import { configureStore } from '@reduxjs/toolkit'
-import { setupListeners } from '@reduxjs/toolkit/query'
-import { postApi } from "./createApi"
+import { postApi } from "."
+
+// создается Redux-хранилище
 
 const rootReducer= combineReducers({
   [postApi.reducerPath]:postApi.reducer

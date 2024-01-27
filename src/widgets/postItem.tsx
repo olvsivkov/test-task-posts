@@ -1,14 +1,14 @@
-// PostItem.tsx
-import React from 'react';
 import { Link } from 'react-router-dom';
 import type { FC } from 'react';
-import IPost from '../store/createApi';
+import {IPost} from '../shared/redux-query-api';
 
 interface IPostItemProps {
   post: IPost;
 }
 
-const PostItem: FC<IPostItemProps> = ({ post }) => {
+// компонент отображение поста в списке постов
+
+export const PostItem: FC<IPostItemProps> = ({ post }) => {
   return (
     <Link to={`/posts/${post.id}`}>
       <div className='container__postItem'>
@@ -22,4 +22,3 @@ const PostItem: FC<IPostItemProps> = ({ post }) => {
   );
 };
 
-export {PostItem};

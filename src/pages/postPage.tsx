@@ -1,29 +1,27 @@
 // PostPage.tsx
 import { useParams, useNavigate } from 'react-router-dom';
-//import { useQuery } from '@reduxjs/toolkit/query/react';
-import { postApi } from '../store/createApi';
+import { postApi } from '../shared/redux-query-api';
 import type { FC } from 'react';
 
-const PostPage: FC = () => {
+
+export const PostPage: FC = () => {
   const {id} = useParams();
   const navigate = useNavigate();
-  const { data: posts, isLoading } = id ? postApi.useFetchPostByIdQuery(+id) : { data: undefined, isLoading: true };
+  const { data: posts, isLoading } = id ? postApi.useFetchPostByIdQuery(parseInt(id)) : { data: undefined, isLoading: true };
 
   return (
     <div>
       {isLoading ? (
-        <div>Loading data...</div>
+        <div>Загрузка...</div>
       ) : (
         <>
           <div>№ {posts?.id}</div>
           <div className='postitem__title'>Title: {posts?.title}</div>
           <div className='postitem__body'>Body:{posts?.body}</div>
-          <p>Страница есть!</p>
         </>
       )}
-      <button onClick={() => navigate(-1)}>Go back</button>
+      <button onClick={() => navigate(-1)}>Назад</button>
     </div>
   );
 };
 
-export { PostPage }

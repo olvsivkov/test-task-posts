@@ -2,9 +2,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { Provider } from 'react-redux';
-import { setupStore } from './store/reducer';
-import {PostContainer} from './pages/allPostsPage';
-import {PostPage} from './pages/postPage';
+import { setupStore } from '../shared/redux-query-api';
+import { PostContainer } from '../pages';
+import { PostPage } from '../pages';
 
 const store = setupStore();
 setupListeners(store.dispatch);

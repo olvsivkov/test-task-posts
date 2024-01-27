@@ -1,25 +1,13 @@
 
 import { FC, useEffect, useState } from 'react';
-import { postApi } from '../store/createApi'
-import { PostItem } from './postItem';
+import { postApi } from '../shared/redux-query-api'
+import { PostItem } from '../widgets';
 
-/*const PostItem:FC<IPostItemProps> = ({post}) => {
-  return (
-      <div className='container__postItem'>
-          <div>№ {post.id}</div>
-          <div className='postitem__title'>Title: {post.title}</div>
-          <div  className='postitem__body'>
-            Body:  {post.body.length>20?post.body.substring(0,20)+'...':post.body}
-          </div>
-      </div>
-  );
-};*/
-
-const PostContainer: FC = () => {
+export const PostContainer: FC = () => {
   const [currentPostStart,setCurrentPostStart]=useState(0)
   const {data:posts, isLoading} = postApi.useFetchAllPostsQuery({limit:10,start:currentPostStart})
-  const [isMyFetching,setIsFetchingDown]=useState(false)
-  const [isMyFetchingUp,setIsMyFetchingUp]=useState(false)
+  const [isMyFetching, setIsFetchingDown]=useState(false) // состояние когда скролл достиг нижней части 
+  const [isMyFetchingUp, setIsMyFetchingUp]=useState(false) // состояние когда скролл достиг верхней части 
 
   useEffect(()=>{
       if(isMyFetching)
@@ -47,8 +35,11 @@ const PostContainer: FC = () => {
       document.removeEventListener('scroll',scrollHandler)
     }
   },[])
-
-  const scrollHandler=(e:any):void=>{
+/*
+Если верхняя часть документа прокручена менее чем на 50 пикселей, то состояние isMyFetchingUp = true.
+Если разница между общей высотой и значением прокрутки минус высота окна меньше чем 50 пикселей, то состояние isFetchingDown = true, и происходит прокрутка окна до конца документа.
+*/ 
+  const scrollHandler = (e:any):void => {
       if(e.target.documentElement.scrollTop<50)
       {
           setIsMyFetchingUp(true)
@@ -59,14 +50,14 @@ const PostContainer: FC = () => {
           window.scrollTo(0,(e.target.documentElement.scrollHeight + e.target.documentElement.scrollTop));
       }
   }
+
   return (
       <div>
           <div className='post__list'>
               {posts?.map(post=><PostItem key={post.id} post={post}/>)}
           </div>
-          {isLoading&&<div>Загрузка данных</div>}
+          {isLoading&&<div>Загрузка данных...</div>}
       </div>
   );
 };
 
-export {PostContainer}
