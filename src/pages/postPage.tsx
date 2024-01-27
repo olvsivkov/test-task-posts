@@ -1,8 +1,9 @@
 // PostPage.tsx
-import { useParams, useNavigate } from 'react-router-dom';
-import { postApi } from '../shared/redux-query-api';
-import type { FC } from 'react';
-
+import { useParams, useNavigate } from "react-router-dom";
+import { postApi } from "../shared/redux-query-api";
+import type { FC } from "react";
+import {Preloader} from "../widgets"
+import "./index.css"
 
 export const PostPage: FC = () => {
   const {id} = useParams();
@@ -10,17 +11,19 @@ export const PostPage: FC = () => {
   const { data: posts, isLoading } = id ? postApi.useFetchPostByIdQuery(parseInt(id)) : { data: undefined, isLoading: true };
 
   return (
-    <div>
+    <div className="card">
       {isLoading ? (
-        <div>Загрузка...</div>
+        <div className="preloader">
+          <Preloader/>
+        </div>
       ) : (
-        <>
-          <div>№ {posts?.id}</div>
-          <div className='postitem__title'>Title: {posts?.title}</div>
-          <div className='postitem__body'>Body:{posts?.body}</div>
-        </>
+        <div className="card-content">
+          <span>post: {posts?.id}</span>
+          <span className="title-style">{posts?.title}</span>
+          <p className="description-post-style">{posts?.body}</p>
+        </div>
       )}
-      <button onClick={() => navigate(-1)}>Назад</button>
+      <button className="waves-effect waves-light btn-large" onClick={() => navigate(-1)}>Назад</button>
     </div>
   );
 };

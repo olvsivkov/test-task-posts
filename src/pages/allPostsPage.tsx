@@ -1,11 +1,14 @@
 
-import { FC, useEffect, useState } from 'react';
-import { postApi } from '../shared/redux-query-api'
-import { PostItem } from '../widgets';
+import { FC, useEffect, useState } from "react";
+import { postApi } from "../shared/redux-query-api"
+import { PostItem } from "../widgets";
+import { Preloader } from "../widgets"
+import "materialize-css/dist/css/materialize.min.css"
+import "./index.css"
 
 export const PostContainer: FC = () => {
   const [currentPostStart,setCurrentPostStart]=useState(0)
-  const {data:posts, isLoading} = postApi.useFetchAllPostsQuery({limit:10,start:currentPostStart})
+  const {data:posts, isLoading} = postApi.useFetchAllPostsQuery({limit:20,start:currentPostStart})
   const [isMyFetching, setIsFetchingDown]=useState(false) // состояние когда скролл достиг нижней части 
   const [isMyFetchingUp, setIsMyFetchingUp]=useState(false) // состояние когда скролл достиг верхней части 
 
@@ -30,9 +33,9 @@ export const PostContainer: FC = () => {
   },[isMyFetchingUp])
 
   useEffect(()=>{
-    document.addEventListener('scroll',scrollHandler)
+    document.addEventListener("scroll",scrollHandler)
     return ()=>{
-      document.removeEventListener('scroll',scrollHandler)
+      document.removeEventListener("scroll",scrollHandler)
     }
   },[])
 /*
@@ -52,11 +55,11 @@ export const PostContainer: FC = () => {
   }
 
   return (
-      <div>
-          <div className='post__list'>
+      <div style={{ width: "75%", margin: "0 auto" }}>
+          <div className="collection">
               {posts?.map(post=><PostItem key={post.id} post={post}/>)}
           </div>
-          {isLoading&&<div>Загрузка данных...</div>}
+          {isLoading&&<div className="preloader"><Preloader/></div>}
       </div>
   );
 };

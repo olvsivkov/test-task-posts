@@ -1,0 +1,15 @@
+div {
+  cursor: auto;
+}
+
+.hoverable {
+  padding: 2% 1%;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.title-style{
+  font-size: 17px;
+  padding-left: 1%;
+  font-weight: 600;
+}

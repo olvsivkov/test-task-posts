@@ -1,0 +1,20 @@
+.card{
+  width: 70%;
+  margin: 0 auto;
+}
+
+.title-style{
+  font-size: 17px;
+  padding-left: 1%;
+  font-weight: 600;
+}
+
+.description-post-style{
+  padding: 2% 1%;
+  border-radius: 5px;
+}
+
+.preloader {
+  width: 50px;
+  margin: 0 auto;
+}
