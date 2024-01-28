@@ -1,3 +1,5 @@
+
+
 .card{
   width: 70%;
   margin: 0 auto;
@@ -17,4 +19,8 @@
 .preloader {
   width: 50px;
   margin: 0 auto;
+}
+
+.block-in-centre-outer {
+  margin-top: 10%;
 }

@@ -11,19 +11,21 @@ export const PostPage: FC = () => {
   const { data: posts, isLoading } = id ? postApi.useFetchPostByIdQuery(parseInt(id)) : { data: undefined, isLoading: true };
 
   return (
-    <div className="card">
-      {isLoading ? (
-        <div className="preloader">
-          <Preloader/>
-        </div>
-      ) : (
-        <div className="card-content">
-          <span>post: {posts?.id}</span>
-          <span className="title-style">{posts?.title}</span>
-          <p className="description-post-style">{posts?.body}</p>
-        </div>
-      )}
-      <button className="waves-effect waves-light btn-large" onClick={() => navigate(-1)}>Назад</button>
+    <div className="block-in-centre-outer">
+      <div className="card block-in-centre-inner">
+        {isLoading ? (
+          <div className="preloader">
+            <Preloader/>
+          </div>
+        ) : (
+          <div className="card-content">
+            <span>post: {posts?.id}</span>
+            <span className="title-style">{posts?.title}</span>
+            <p className="description-post-style">{posts?.body}</p>
+          </div>
+        )}
+        <button className="waves-effect waves-light btn-large" onClick={() => navigate(-1)}>Назад</button>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 # Тестовое задание
 
-Этот проект, созданный с помощью[create-next-app](https://create-react-app.dev/docs/getting-started/).
+Этот проект, созданный с помощью[create-react-app](https://create-react-app.dev/docs/getting-started/).
 
 ## Приступая к работе
 
